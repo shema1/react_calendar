@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import TodoList from "./TodoList";
+import Header from "./header/Header";
+import Table from "./calendar_table/Table";
 
 class App extends Component {
-  state = {
-    isOpen: false
-  };
+ 
 
   render() {
     return (
-      <TodoList/>
+      <>
+      <Header/>
+      <Table/>
+      </>
     );
   }
 }
