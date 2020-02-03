@@ -1,30 +1,41 @@
 import React, { Component } from "react";
 import Times from "./Times";
-import { generateNumbersRange } from "../utilites";
 import TableSection from "./TableSection";
-import "./table.scss";
 import Lines from "./Lines";
+import { generateNumbersRange } from "../utilites";
+import "./table.scss";
+import RedLine from "./RedLine";
 
 class Table extends Component {
   render() {
     return (
-      <div className="table">
-        <div className="times">
-          {generateNumbersRange(0, 23).map(time => (
-            <Times key={time} time={time} />
-          ))}
-        </div>
-        <div className="lines">
-          {generateNumbersRange(1,24).map(line =>(
-            <Lines/>
-          ))}
-        </div>
-        <div className="table-sections">
-          {generateNumbersRange(1, 24).map(block => (
-            <TableSection key={block} test={block} />
-          ))}
-        </div>
-      </div>
+      <>
+        <section className="table">
+          <div className="times">
+            {generateNumbersRange(1, 23).map(time => (
+              <Times key={time} time={time} />
+            ))}
+          </div>
+          <div className="lines">
+            {generateNumbersRange(1, 24).map(line => (
+              <Lines key={line} />
+            ))}
+          </div>
+          <div className="table-sections">
+            {generateNumbersRange(0, 23).map(block => (
+              <TableSection
+                key={block}
+                id={Math.random()}
+                onPopup={this.props.onPopup}
+                firstMonday={this.props.firstMonday}
+                time={block}
+                events={this.props.events}
+              />
+            ))}
+          </div>
+          <RedLine />
+        </section>
+      </>
     );
   }
 }

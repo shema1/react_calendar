@@ -4,14 +4,14 @@ import moment from "moment";
 import PrevWeakButton from "./NextWeakButton";
 import NextWeakButton from "./PrevWeakButton";
 
-const Navigation = ({ prevWeak, nextWeak, timeNow, handleToday }) => {
+const Navigation = ({ prevWeak, nextWeak, timeNow, handleToday,popup }) => {
   const secondMonth = moment(timeNow).format('MMM') ===moment(timeNow).add(7,"days").format('MMM')
   ? " "
   :moment(timeNow).add(7,"days").format('MMM')
   return (
     <>
       <nav className="navigation">
-        <button className="add-button add-event">
+        <button className="add-button add-event" onClick={popup}>
           <div className="VVsfQ add-event ">
             <svg
               className="add-event"

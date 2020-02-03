@@ -11,13 +11,13 @@
         height: 12px;
         width: 12px;
         border-radius: 100%;
-        background-color: $timeline-color;
+        background-color: #ea4335;
     }
     &__line {
         position: relative;
         bottom: 6px;
         right: 6px;
         width: 100%;
-        border-top: 2px solid $timeline-color;
+        border-top: 2px solid #ea4335;
     }
 }

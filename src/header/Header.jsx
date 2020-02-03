@@ -7,37 +7,18 @@ import { generateNumbersRange } from "../utilites";
 import "./header.scss";
 
 class Header extends Component {
-  state = {
-    timeNow: moment()
-  };
-
-  nextWeak = () => {
-    this.setState({
-      timeNow: this.state.timeNow.add(7, "days")
-    });
-  };
-
-  prevWeak = () => {
-    this.setState({
-      timeNow: this.state.timeNow.subtract(7, "days")
-    });
-  };
-  handleToday = () => {
-    this.setState({
-      timeNow: moment()
-    });
-  };
-
+ 
   render() {
     return (
       <header className="header">
         <Navigation
-          timeNow={this.state.timeNow}
-          prevWeak={this.prevWeak}
-          nextWeak={this.nextWeak}
-          handleToday={this.handleToday}
+          timeNow={this.props.timeNow}
+          prevWeak={this.props.prevWeak}
+          nextWeak={this.props.nextWeak}
+          handleToday={this.props.handleToday}
+          popup={this.props.popup} 
         />
-        <Days timeNow={this.state.timeNow} />
+        <Days timeNow={this.props.timeNow} />
         <section className="holidays">
           {generateNumbersRange(0, 6).map(num => (
             <Holidays key={num} />
