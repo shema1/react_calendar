@@ -3,53 +3,45 @@ import moment from "moment";
 import {timeOptions} from "./timeOptions"
 
 class Form extends Component {
-  state = {
-    eventName: "",
-    startDate: this.props.selectDay.startDateEvent,
-    startTime: moment().format('hh:mm'),
-    endDate: "",
-    endTime: ""
-  };
+ 
 
 
-
-  // const {
-  //   endDateEvent,
-  //   endTime,
-  //   startDateEvent,
-  //   startTime
-  // } = this.props.selectDay;
-
-  
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleTaskCreate = event => {
-    console.log("work")
-    const newEvent = {
-      text: this.state.eventName,
-      startDateEvent: this.state.startDate + "T" + this.state.startTime,
-      endDateEvent: this.state.endDate + "T" + this.state.endTime,
-      description: this.state.description
-    };
-    this.props.onCreate(newEvent);
-    this.setState({
-      eventName: "",
-      startDate: "",
-      startTime: "",
-      endDate: "",
-      endTime: ""
-    });
-    event.preventDefault();
-  };
+  // handleTaskCreate = event => {
+  //   console.log("work")
+  //   const newEvent = {
+  //     event: this.state.eventName,
+  //     startDateEvent: this.state.startDate + "T" + this.state.startTime,
+  //     endDateEvent: this.state.endDate + "T" + this.state.endTime,
+  //     description: this.state.description
+  //   };
+  //   this.props.onCreate(newEvent);
+  //   this.setState({
+  //     eventName: "",
+  //     startDate: "",
+  //     startTime: "",
+  //     endDate: "",
+  //     endTime: ""
+  //   });
+  //   event.preventDefault();
+  // };
   render() {
     // console.log('test '+ this.props.selectDay.startDateEvent)
-    return (
-      <form className="popup__form"  onSubmit={() => this.handleTaskCreate(event)}>
+    const {
+    nameEvent,
+    endDate,
+    endTime,
+    startDate,
+    startTime,
+    description,
+    id,
+    endDateEvent,
+    startDateEvent
+  } = this.props.selectDay;
+  const buttonDel = this.props.deleteButton?"delete-ivent delete-ivent__on":"delete-ivent";
+  // console.log(this.props.handleDeleteEvent+" delete");
+  // console.log(this.props.handleDeleteEvent);
+  return (
+      <form className="popup__form"  onSubmit={() => this.props.onCreate(event)}>
         <button
           className="close material-icons"
           onClick={() => this.props.popupOff(event)}
@@ -59,10 +51,10 @@ class Form extends Component {
         <input
           className="input__name"
           type="text"
-          name="eventName"
+          name="nameEvent"
           placeholder="Input name event"
-          value={this.state.eventName}
-          onChange={this.handleChange}
+          value={nameEvent}
+          onChange={() =>this.props.handleChangeForm(event)}
         />
         <div className="date-block ">
           <i className="Tiny material-icons">access_time</i>
@@ -70,32 +62,14 @@ class Form extends Component {
             className="start-date input-style"
             type="date"
             name="startDate"
-            value={this.state.date}
-            onChange={this.handleChange}
+            value={startDateEvent?moment(startDateEvent).format("YYYY-MM-DD"):startDate}
+            onChange={() =>this.props.handleChangeForm(event)}
           />
-          {/* <input
-            className="start-time time-list input-style "
-            type="time"
-            name="startTime"
-            min="00:00"
-            max="23:45"
-            value={this.state.startTime}
-            onChange={this.handleChange}
-            required
-          ></input> */}
-           {/* <input
-            className="end-time time-list input-style "
-            type="time"
-            name="endTime"
-            min="00:00"
-            max="23:45"
-            value={this.state.endTime}
-            onChange={this.handleChange}
-            required
-          ></input> */}
           <select
             className="start-time time-list input-style "
             name="startTime"
+            value={startDateEvent?moment(startDateEvent).format("HH:mm"):startTime}
+            onChange={() =>this.props.handleChangeForm(event)}
           >
             {timeOptions()}
           </select>
@@ -103,6 +77,8 @@ class Form extends Component {
           <select
             className="end-time time-list input-style "
             name="endTime"
+            value={endDateEvent?moment(endDateEvent).format("HH:mm"):endTime}
+            onChange={() =>this.props.handleChangeForm(event)}
           >
             {timeOptions()}
           </select>
@@ -112,27 +88,10 @@ class Form extends Component {
             id="start "
             name="endDate"
             max="2020-12-31 "
-            value={this.state.endDate}
-            onChange={this.handleChange}
+            value={endDateEvent?moment(endDateEvent).format("YYYY-MM-DD"):endDate}
+            onChange={() =>this.props.handleChangeForm(event)}
           />
         </div>
-        {/* <div className="input__color">
-          <span>choose a color</span>
-          <select className="select__color" name="color">
-            <option value="#039be5" className="standart" selected>
-              standart
-            </option>
-            <option value="red" className="red">
-              red
-            </option>
-            <option value="green" className="green">
-              green
-            </option>
-            <option value="blue" className="blue">
-              blue
-            </option>
-          </select>
-        </div> */}
         <div className="description ">
           <i className="Tiny material-icons ">format_align_left</i>
           <textarea
@@ -141,12 +100,12 @@ class Form extends Component {
             cols="42 "
             rows="4 "
             placeholder="Добавте опис "
-            value={this.state.description}
-            onChange={this.handleChange}
+            value={description}
+            onChange={() =>this.props.handleChangeForm}
           ></textarea>
         </div>
         <div className="control ">
-          <button className="delete-ivent ">
+          <button className={buttonDel} onClick={()=>this.props.handleDeleteEvent(id,event)}>
             <i className="Tiny material-icons ">delete</i>
           </button>
           <button

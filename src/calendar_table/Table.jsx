@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Times from "./Times";
 import TableSection from "./TableSection";
 import Lines from "./Lines";
-import { generateNumbersRange } from "../utilites";
+import { generateNumbersRange, check } from "../utilites";
 import "./table.scss";
 import RedLine from "./RedLine";
 
@@ -30,10 +30,11 @@ class Table extends Component {
                 firstMonday={this.props.firstMonday}
                 time={block}
                 events={this.props.events}
+                updateEvent={this.props.updateEvent}
               />
             ))}
           </div>
-          <RedLine />
+          {/* <RedLine /> */}
         </section>
       </>
     );
