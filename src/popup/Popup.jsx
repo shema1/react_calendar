@@ -12,6 +12,8 @@ class Popup extends Component {
       handleChangeForm,
       deleteButton,
       handleDeleteEvent,
+      handleUpdateEvent,
+      update
     } = this.props;
     const popup = isOpen ? "popup popup-on" : "popup";
     return (
@@ -23,6 +25,8 @@ class Popup extends Component {
           handleChangeForm={handleChangeForm}
           deleteButton={deleteButton}
           handleDeleteEvent={handleDeleteEvent}
+          handleUpdateEvent={handleUpdateEvent}
+          update={update}
         />
         {/* <span className="event__name "></span>
         <span className="event__description "></span> */}

@@ -1,9 +1,8 @@
 import React from "react";
-import { generateNumbersRange } from "../utilites";
 import moment from "moment";
 import "./event.scss";
 
-const Event = ({ curentEvent, updateEvent }) => {
+const Event = ({ curentEvent,popupForUpdate }) => {
   const startTime = moment(curentEvent[0].startDateEvent).format("H:mm");
   const endTime = moment(curentEvent[0].endDateEvent).format("H:mm");
   const difference =
@@ -12,9 +11,10 @@ const Event = ({ curentEvent, updateEvent }) => {
   const style = {
     height: difference
   };
-  // console.log(curentEvent)
   return (
-    <div className="event" style={style} onClick={() => updateEvent(event, id)}>
+    <div className="event" style={style} 
+    onClick={() => popupForUpdate(id)}
+    >
       <div className="event__name">{curentEvent[0].nameEvent}</div>
       <div className="event__time">
         {startTime} -{endTime}

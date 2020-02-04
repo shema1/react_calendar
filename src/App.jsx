@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import Table from "./calendar_table/Table";
 import Popup from "./popup/Popup";
 import moment from "moment";
-import { createEvents, getEvents, fetchEvents, deleteEvents } from "./eventsGateaway";
+import { createEvents, deleteEvents,getEventsList , updateEvents } from "./eventsGateaway";
 import { check } from "./utilites";
 import { validator } from "./validator";
 
@@ -13,24 +13,20 @@ class App extends Component {
     firstMonday: moment().startOf("isoWeek"),
     isOpen: false,
     delete: false,
+    update:false,
     selectDay: {},
     events: []
   };
-  // componentDidMount() {
-  //   getEvents().then(events => {
-  //     this.state({
-  //       events: events
-  //     });
-  //   });
-  // }
+ 
 
   componentDidMount() {
-    fetchEvents().then(events => {
+    getEventsList().then(events => {
       this.setState({
         events: events
       });
     });
   }
+  
   nextWeak = () => {
     this.setState({
       firstMonday: this.state.timeNow.add(7, "days")
@@ -49,11 +45,12 @@ class App extends Component {
     });
   };
 
-  popup = (date, time, id) => {
+  popup = (date, time) => {
     if (event.target.className == "table-sections__section"  ) {
       this.setState({
         delete: false,
         isOpen: true,
+        update:false,
         selectDay: {
           nameEvent: "",
           startDate: moment(date).format("YYYY-MM-DD"),
@@ -63,10 +60,22 @@ class App extends Component {
           description: ""
         }
       });
-      // console.log(this.state.events)
-      // console.log(moment("2020-02-04T04:00").format("YYYY-MM-DD"))
       console.log("work");
     }
+  };
+
+  popupForUpdate = (id) => {
+    const curentEvent = this.state.events.find(elem => elem.id == id);
+    this.setState({
+      isOpen: true,
+      delete: true,
+      update:true,
+      selectDay: {...curentEvent ,id}
+    });
+
+    // updateEvents(id,curentEvent )
+    
+    console.log(curentEvent )
   };
 
   popupOff = event => {
@@ -87,7 +96,6 @@ class App extends Component {
   };
 
   onCreateEvent = event => {
-    const { events } = this.state;
     const {
       nameEvent,
       startDate,
@@ -104,40 +112,46 @@ class App extends Component {
     };
     if(validator(newEvent)){
     createEvents({...newEvent}).then(() =>
-    getEvents().then(events => {
+    getEventsList().then(events => {
       this.setState({
         events: events,
-        selectDay: ""
+        selectDay: "",
+        isOpen: false,
       });
     })
     );
   }
     event.preventDefault();
-    // console.log(events);
   };
 
-  updateEvent = (event, id) => {
-    const eventR = this.state.events.find(elem => elem.id == id);
-    // const test = his.state.events.indexOf(eventR)
-    this.setState({
-      isOpen: true,
-      delete: true,
-      selectDay: {...eventR,id}
-    });
-    console.log("update")
-  };
 
-  handleDeleteEvent=(id,event)=>{
+
+   updateEventTest = ()=>{
+    const curentEvent = this.state.selectDay
+     updateEvents(curentEvent.id, curentEvent)
+     console.log("update is work")
+   }
+
+
+
+  handleDeleteEvent=(event,id)=>{
+    console.log("Delete work +"+id)
     event.preventDefault()
-    // deleteEvents(id)
-    console.log(id+" work")
+    deleteEvents(id).then(()=>getEventsList()).then(events =>{
+      this.setState({
+        events: events
+      });
+    })
+    this.setState({
+      isOpen: false
+    });
   }
 
   render() {
     return (
       <>
         <Header
-          popup={this.popup.timeNow}
+          popup={this.popup}
           timeNow={this.state.timeNow}
           nextWeak={this.nextWeak}
           prevWeak={this.prevWeak}
@@ -145,7 +159,7 @@ class App extends Component {
         />
         <Table
           onPopup={this.popup}
-          updateEvent={this.updateEvent}
+          popupForUpdate={this.popupForUpdate}
           firstMonday={this.state.firstMonday}
           events={this.state.events}
         />
@@ -156,7 +170,9 @@ class App extends Component {
           selectDay={this.state.selectDay}
           handleChangeForm={this.handleChangeForm}
           deleteButton={this.state.delete}
-          handleDeleteEvent={this.state.handleDeleteEvent}
+          handleDeleteEvent={this.handleDeleteEvent}
+          handleUpdateEvent={this.updateEventTest}
+          update={this.state.update}
         />
       </>
     );

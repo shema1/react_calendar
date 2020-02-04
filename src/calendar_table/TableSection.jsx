@@ -4,21 +4,26 @@ import { generateNumbersRange } from "../utilites";
 import moment from "moment";
 import RedLine from "./RedLine";
 
-const TableSection = ({ onPopup, firstMonday, events, time, updateEvent }) => {
+const TableSection = ({ onPopup, firstMonday, events, time,popupForUpdate }) => {
   let day = moment(firstMonday)
   let days = generateNumbersRange(1, 7).map(line => {
+    // console.log(moment(day).format("YYYY-MM-DD") + "---"+moment().format("YYYY-MM-DD"))
+    // const check =
+    // moment(day).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD") 
+    // &&
+    // moment().format("H") >= time &&
+    // moment().format("H") <= time;
     let dayElem = (
      <>
-     {moment(day).format("YYYY-MM-DD") ==moment().format("YYYY-MM-DD")
-     ?<RedLine/>:null}
+     {/* {check && <RedLine/>} */}
       <TableSectionLine
-        key={line}
+        key={Math.random()*line}
         id={Math.random()}
         onPopup={onPopup}
         date={day}
         time={time}
         events={events}
-        updateEvent={updateEvent}
+        popupForUpdate={popupForUpdate}
       />
      </>
     );

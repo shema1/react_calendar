@@ -11,7 +11,7 @@ const Navigation = ({ prevWeak, nextWeak, timeNow, handleToday,popup }) => {
   return (
     <>
       <nav className="navigation">
-        <button className="add-button add-event" onClick={popup}>
+        <button className="add-button add-event" onClick={()=>popup()}>
           <div className="VVsfQ add-event ">
             <svg
               className="add-event"

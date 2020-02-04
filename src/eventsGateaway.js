@@ -1,4 +1,4 @@
-export const baseUrl = 'https://crudcrud.com/api/79e65eadde354ae18db94d04ccdee356/events';
+export const baseUrl = 'https://5e39d9d88d7e1300149cd70c.mockapi.io/api/v1/events';
 
 const mapTasks = (events) => events.map(({ _id, ...rest }) => ({ ...rest, id: _id }));
 
@@ -13,20 +13,6 @@ export const createEvents = (eventData) => fetch(baseUrl, {
   },
   body: JSON.stringify(eventData),
 });
-
-export const fetchEvents = () => {
-  return fetch(baseUrl)
-      .then(response => {
-          if (response.ok) {
-              return response.json();
-          }
-      })
-      .then(tasksList => tasksList.map(({ _id, ...task }) => ({
-          id: _id,
-          ...task
-      })));
-
-}
 
 export const updateEvents = (eventsId, updateEventsData) => fetch(`${baseUrl}/${eventsId}`, {
   method: 'PUT',

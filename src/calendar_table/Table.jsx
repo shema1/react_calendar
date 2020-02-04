@@ -4,7 +4,6 @@ import TableSection from "./TableSection";
 import Lines from "./Lines";
 import { generateNumbersRange, check } from "../utilites";
 import "./table.scss";
-import RedLine from "./RedLine";
 
 class Table extends Component {
   render() {
@@ -24,13 +23,13 @@ class Table extends Component {
           <div className="table-sections">
             {generateNumbersRange(0, 23).map(block => (
               <TableSection
-                key={block}
+                key={Math.random()}
                 id={Math.random()}
                 onPopup={this.props.onPopup}
                 firstMonday={this.props.firstMonday}
                 time={block}
                 events={this.props.events}
-                updateEvent={this.props.updateEvent}
+                popupForUpdate={this.props.popupForUpdate}
               />
             ))}
           </div>
