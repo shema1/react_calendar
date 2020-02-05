@@ -4,14 +4,14 @@ import "./days.scss";
 import { generateNumbersRange } from "../utilites";
 import moment from "moment";
 
-const Days = ({timeNow}) => { 
+const Days = ({firstMonday}) => { 
 
   return (
     <section className="days">
       {generateNumbersRange(0, 6).map(sectionNumber => (
         <Day
           key={sectionNumber}
-          timeNow={moment(timeNow).startOf('isoWeek').add(sectionNumber, "days")}
+          timeNow={moment(firstMonday).add(sectionNumber, "days")}
         />
       ))}
     </section>

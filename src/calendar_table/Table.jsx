@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import Times from "./Times";
 import TableSection from "./TableSection";
 import Lines from "./Lines";
 import { generateNumbersRange } from "../utilites";
 import "./table.scss";
 
-class Table extends Component {
+class Table extends PureComponent {
   render() {
     return (
       <>

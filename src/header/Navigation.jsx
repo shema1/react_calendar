@@ -4,10 +4,10 @@ import moment from "moment";
 import PrevWeakButton from "./NextWeakButton";
 import NextWeakButton from "./PrevWeakButton";
 
-const Navigation = ({ prevWeak, nextWeak, timeNow, handleToday,popup }) => {
-  const secondMonth = moment(timeNow).format('MMM') ===moment(timeNow).add(7,"days").format('MMM')
+const Navigation = ({ prevWeak, nextWeak, handleToday,popup,firstMonday }) => {
+  const secondMonth = moment(firstMonday).format('MMM') ===moment(firstMonday).add(7,"days").format('MMM')
   ? " "
-  :moment(timeNow).add(7,"days").format('MMM')
+  :"-"+moment(firstMonday).add(7,"days").format('MMM')
   return (
     <>
       <nav className="navigation">
@@ -49,7 +49,7 @@ const Navigation = ({ prevWeak, nextWeak, timeNow, handleToday,popup }) => {
           <PrevWeakButton prevWeak={prevWeak} />
           <NextWeakButton nextWeak={nextWeak} />
         </div>
-        <span className="header-date">{timeNow.format("MMM")} {secondMonth}</span>
+        <span className="header-date">{firstMonday.format("MMM")}{secondMonth}</span>
         <span className="status-server"></span>
       </nav>
     </>

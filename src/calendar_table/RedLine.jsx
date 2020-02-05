@@ -5,7 +5,7 @@ const RedLine = () => {
 
 const timeNowHour = moment().hour()
 const timeNowMin = moment().minute()
-const result =  (timeNowHour*60 +timeNowMin)
+const result =  (timeNowMin)
 // const widthTableSectionElem = document.querySelector('.table-sections__section').offsetWidth;
 const style = {
     top:result,

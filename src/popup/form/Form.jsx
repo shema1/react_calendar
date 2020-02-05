@@ -101,7 +101,7 @@ class Form extends Component {
             rows="4 "
             placeholder="Добавте опис "
             value={description}
-            onChange={() => this.props.handleChangeForm}
+            onChange={() => this.props.handleChangeForm(event)}
           ></textarea>
         </div>
         <div className="control ">
