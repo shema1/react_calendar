@@ -19,11 +19,3 @@ const Days = ({firstMonday}) => {
 };
 
 export default Days;
-
-// const time = generateNumbersRange(0, 24).map(elem1 => {
-//   generateNumbersRange(0, 4).map(elem => (
-//     <option value="${setTime}:${cell}" data-block-number="${timeList}">
-//       {elem}
-//     </option>
-//   ));
-// });

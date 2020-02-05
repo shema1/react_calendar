@@ -32,13 +32,13 @@ class App extends Component {
 
   nextWeak = () => {
     this.setState({
-      firstMonday: this.state.firstMonday.add(7, "days")
+      firstMonday:  moment(this.state.firstMonday).add(7, "days")
     });
   };
 
   prevWeak = () => {
     this.setState({
-      firstMonday: this.state.firstMonday.subtract(7, "days")
+      firstMonday:  moment(this.state.firstMonday).subtract(7, "days")
     });
   };
 
