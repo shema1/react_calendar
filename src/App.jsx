@@ -60,7 +60,6 @@ class App extends Component {
           description: ""
         }
       });
-      console.log("work");
     }
   };
 
@@ -72,10 +71,6 @@ class App extends Component {
       update:true,
       selectDay: {...curentEvent ,id}
     });
-
-    // updateEvents(id,curentEvent )
-    
-    console.log(curentEvent )
   };
 
   popupOff = event => {
@@ -129,13 +124,11 @@ class App extends Component {
    updateEventTest = ()=>{
     const curentEvent = this.state.selectDay
      updateEvents(curentEvent.id, curentEvent)
-     console.log("update is work")
    }
 
 
 
   handleDeleteEvent=(event,id)=>{
-    console.log("Delete work +"+id)
     event.preventDefault()
     deleteEvents(id).then(()=>getEventsList()).then(events =>{
       this.setState({

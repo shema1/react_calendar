@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Times from "./Times";
 import TableSection from "./TableSection";
 import Lines from "./Lines";
-import { generateNumbersRange, check } from "../utilites";
+import { generateNumbersRange } from "../utilites";
 import "./table.scss";
 
 class Table extends Component {
@@ -33,7 +33,6 @@ class Table extends Component {
               />
             ))}
           </div>
-          {/* <RedLine /> */}
         </section>
       </>
     );

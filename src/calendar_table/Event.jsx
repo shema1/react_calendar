@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import "./event.scss";
 
-const Event = ({ curentEvent,popupForUpdate }) => {
+const Event = ({ curentEvent, popupForUpdate }) => {
   const startTime = moment(curentEvent[0].startDateEvent).format("H:mm");
   const endTime = moment(curentEvent[0].endDateEvent).format("H:mm");
   const difference =
@@ -12,9 +12,7 @@ const Event = ({ curentEvent,popupForUpdate }) => {
     height: difference
   };
   return (
-    <div className="event" style={style} 
-    onClick={() => popupForUpdate(id)}
-    >
+    <div className="event" style={style} onClick={() => popupForUpdate(id)}>
       <div className="event__name">{curentEvent[0].nameEvent}</div>
       <div className="event__time">
         {startTime} -{endTime}

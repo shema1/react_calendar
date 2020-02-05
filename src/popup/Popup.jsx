@@ -28,8 +28,6 @@ class Popup extends Component {
           handleUpdateEvent={handleUpdateEvent}
           update={update}
         />
-        {/* <span className="event__name "></span>
-        <span className="event__description "></span> */}
       </section>
     );
   }
